@@ -80,9 +80,9 @@ const queryUsers = async (filter, options) => {
 const updateUserById = async (userId, updateBody) => {
   const { rows } = await getDoc(sheetID);
 
-  const index = rows.findIndex((row) => parseInt(row.id, 10) === userId);
+  const index = rows.findIndex((row) => row.id.toString() === userId.toString());
   if (index === -1) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'No Exits');
   }
   Object.assign(rows[index], updateBody);
   await rows[index].save();
@@ -92,9 +92,9 @@ const updateUserById = async (userId, updateBody) => {
 const deleteUserById = async (userId) => {
   const { rows } = await getDoc(sheetID);
 
-  const index = rows.findIndex((row) => parseInt(row.id, 10) === userId);
+  const index = rows.findIndex((row) => row.id.toString() === userId.toString());
   if (index === -1) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'No Exits');
   }
   await rows[index].delete(); // delete a row
 
