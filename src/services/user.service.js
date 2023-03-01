@@ -35,7 +35,7 @@ const getUserById = async (id) => {
     return null;
   }
   const userRes = normalizeUser(user);
-
+  delete userRes.password;
   return userRes;
 };
 
@@ -63,13 +63,18 @@ const createUser = async (userBody) => {
   userBody.password = bcrypt.hashSync(userBody.password, 10);
   userBody.id = uuidv4();
   userBody.createdDate = new Date();
+  userBody.status = 'active';
   await sheet.addRow(userBody);
   return userBody;
 };
 
 const queryUsers = async (filter, options) => {
   const { rows } = await getDoc(sheetID);
-  return rows.map((row) => normalizeUser(row));
+  return rows.map((row) => {
+    const user = normalizeUser(row);
+    delete user.password;
+    return user;
+  });
 };
 
 const updateUserById = async (userId, updateBody) => {
