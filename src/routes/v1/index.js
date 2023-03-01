@@ -4,6 +4,7 @@ const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
 const roleRoute = require('./role.route');
 const levelRoute = require('./level.route');
+const uploadRoute = require('./upload.route');
 
 const config = require('../../config/config');
 
@@ -25,6 +26,10 @@ const defaultRoutes = [
   {
     path: '/levels',
     route: levelRoute,
+  },
+  {
+    path: '/upload',
+    route: uploadRoute,
   },
 ];
 

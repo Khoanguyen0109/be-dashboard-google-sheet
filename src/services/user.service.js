@@ -24,6 +24,8 @@ const normalizeUser = (user) => {
     role: user.role,
     permissions: user.permissions,
     password: user.password,
+    imageId: user.imageId,
+    imageName: user.imageName,
     status: user.status,
   };
 };
